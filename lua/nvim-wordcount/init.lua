@@ -8,9 +8,9 @@ function M.setup(opts)
 	local keymaps = opts.keymaps or {}
 
 	-- Set default keybinds if not provided
-	local word_count_key = keymaps.word_count or "<Leader>wc"
-	local diff_open_key = keymaps.diff_open or "<Leader>do"
-	local diff_save_key = keymaps.diff_save or "<Leader>ds"
+	local word_count_key = keymaps.word_count or "<leader>wc"
+	local diff_open_key = keymaps.diff_open or "<leader>do"
+	local diff_save_key = keymaps.diff_save or "<leader>ds"
 	vim.api.nvim_create_autocmd("BufRead", {
 		group = vim.api.nvim_create_augroup("WordCountOpen", { clear = true }),
 		callback = function(args)
