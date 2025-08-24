@@ -119,7 +119,7 @@ function M.get_file_size()
 	while size > 1024 and i < #suffixes do
 		size = size / 1024
 		i = i + 1
-	encountd
+	end
 
 	return string.format("%.1f%s", size, suffixes[i])
 end
