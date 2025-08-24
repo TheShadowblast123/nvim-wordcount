@@ -3,7 +3,14 @@ local M = {}
 local word_count_at_save = {}
 local word_count_at_open = {}
 
-function M.setup()
+function M.setup(opts)
+	opts = opts or {}
+	local keymaps = opts.keymaps or {}
+
+	-- Set default keybinds if not provided
+	local word_count_key = keymaps.word_count or "<Leader>wc"
+	local diff_open_key = keymaps.diff_open or "<Leader>do"
+	local diff_save_key = keymaps.diff_save or "<Leader>ds"
 	vim.api.nvim_create_autocmd("BufRead", {
 		group = vim.api.nvim_create_augroup("WordCountOpen", { clear = true }),
 		callback = function(args)
@@ -31,6 +38,27 @@ function M.setup()
 	vim.api.nvim_create_user_command("WordCountCopyDiffSave", function()
 		M.copy_diff_to_clipboard("save")
 	end, { desc = "Copy word count diff from last save to clipboard" })
+	if word_count_key then
+		vim.keymap.set("n", word_count_key, "<cmd>WordCountCopy<cr>", { desc = "Copy word count to clipboard" })
+	end
+
+	if diff_open_key then
+		vim.keymap.set(
+			"n",
+			diff_open_key,
+			"<cmd>WordCountCopyDiffOpen<cr>",
+			{ desc = "Copy word count diff from open" }
+		)
+	end
+
+	if diff_save_key then
+		vim.keymap.set(
+			"n",
+			diff_save_key,
+			"<cmd>WordCountCopyDiffSave<cr>",
+			{ desc = "Copy word count diff from save" }
+		)
+	end
 end
 
 function M.get_raw_word_count()
