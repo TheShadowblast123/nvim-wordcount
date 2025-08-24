@@ -230,7 +230,7 @@ function M.toggle()
 		vim.notify("Word count statusline disabled")
 	else
 		-- Enable word count statusline
-		vim.opt.statusline = "%!v:lua.require('statusline-word-count').statusline_condition()"
+		vim.opt.statusline = "%!v:lua.require('nvim-wordcount').statusline_condition()"
 		enabled = true
 		vim.notify("Word count statusline enabled")
 	end
