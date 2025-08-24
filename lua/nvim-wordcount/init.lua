@@ -119,7 +119,7 @@ function M.get_file_size()
 	while size > 1024 and i < #suffixes do
 		size = size / 1024
 		i = i + 1
-	end
+	encountd
 
 	return string.format("%.1f%s", size, suffixes[i])
 end
@@ -193,8 +193,10 @@ function M.active()
 
 	-- Calculate available space for center section
 	local width = vim.o.columns
-	local left_width = vim.fn.strwidth(left:gsub("%%#%w+#", ""))
-	local right_width = vim.fn.strwidth(right:gsub("%%#%w+#", ""))
+	local filtered_left, _ = left:gsub("%%#%w+#", "")
+	local filtered_right, _ = right:gsub("%%#%w+#", "")
+	local left_width = vim.fn.strwidth(filtered_left)
+	local right_width = vim.fn.strwidth(filtered_right)
 	local available_space = math.max(0, width - left_width - right_width)
 
 	-- Center section (file path)
