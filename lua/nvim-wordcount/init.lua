@@ -247,7 +247,7 @@ function M.toggle_diff()
 
 	-- Refresh statusline if enabled
 	if enabled then
-		vim.opt.statusline = "%!v:lua.require('statusline-word-count').statusline_condition()"
+		vim.opt.statusline = "%!v:lua.require('nvim-wordcount').statusline_condition()"
 	end
 end
 
@@ -308,7 +308,7 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufEnter" }, {
 	group = group,
 	callback = function()
 		if enabled then
-			vim.opt.statusline = "%!v:lua.require('statusline-word-count').statusline_condition()"
+			vim.opt.statusline = "%!v:lua.require('nvim-wordcount').statusline_condition()"
 		end
 	end,
 })
